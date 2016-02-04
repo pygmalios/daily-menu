@@ -1,0 +1,9 @@
+# TUTUM-STREAM
+
+tutumstream:
+  build: .
+  restart: always
+  environment:
+      - 'CANTEEN=**CANTEEN_ID**'
+      - 'HIPCHAT_ROOM=**HIPCHAT ROOM**'
+      - 'HIPCHAT_API_KEY=**HIPCHAT API KEY**'

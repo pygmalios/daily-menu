@@ -1,0 +1,40 @@
+{
+  "name": "daily-menu",
+  "description": "Daily menu notification",
+  "version": "0.1.0",
+  "private": true,
+  "authors": ["Jan Antala <hello@janantala.com>"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pygmalios/tutum-stream.git"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  },
+  "scripts": {
+
+  },
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "forever": "~0.11.0",
+    "async": "~0.9.0",
+    "jsdom": "~7.2.2",
+    "cron": "~1.1.0",
+    "hipchat-client": "~1.0.4"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.11",
+    "gulp-rename": "~1.2.0",
+    "gulp-util": "~3.0.4",
+    "gulp-jshint": "~1.9.2",
+    "gulp-mocha": "~2.0.0",
+    "raml2html": "~1.5.0",
+    "js-yaml": "^3.2.5",
+    "supertest": "~0.14.0",
+    "should": "~4.0.4",
+    "mocha": "~2.1.0",
+    "jshint-stylish": "~1.0.1",
+    "through2": "~0.6.5"
+  }
+}
