@@ -57,7 +57,7 @@ var sendMessage = function(message, from, to){
         from: 'Daily menu',
         color: 'gray',
         message: string,
-        notify: 0
+        notify: 1
     }, function (err, res) {
         if (err) {
             console.log(err);
