@@ -91,3 +91,10 @@ new lunchNotification('0 0 12 * * *', function(){
         sendMessage(text, 'Obed', 'Večera');
     });
 }, null, true, 'Europe/Bratislava');
+
+var dinnerNotification = require('cron').CronJob;
+new dinnerNotification('0 0 17 * * *', function(){
+    fetchMenu(function(err, text){
+        sendMessage(text, 'Večera', 'KONIEC');
+    });
+}, null, true, 'Europe/Bratislava');
