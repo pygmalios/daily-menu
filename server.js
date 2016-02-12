@@ -4,9 +4,6 @@ var CANTEEN = process.env.CANTEEN || '';
 var HIPCHAT_ROOM = process.env.HIPCHAT_ROOM || '';
 var HIPCHAT_API_KEY = process.env.HIPCHAT_API_KEY || '';
 
-var date = new Date();
-var CANTEEN_WEBPAGE = 'https://www.jedalen.stuba.sk/webkredit/Tisk/ObjednavaniJidlenicek.aspx?dateFrom=' + date.toISOString().split('T')[0] + '&dateTo=' + date.toISOString().split('T')[0] + '&canteen=' + CANTEEN;
-
 var jsdom = require('jsdom');
 var HipChatClient = require('hipchat-client');
 var hipchat = new HipChatClient(HIPCHAT_API_KEY);
@@ -67,6 +64,10 @@ var sendMessage = function(message, from, to){
 };
 
 var fetchMenu = function(cb){
+    var date = new Date();
+    var CANTEEN_WEBPAGE = 'https://www.jedalen.stuba.sk/webkredit/Tisk/ObjednavaniJidlenicek.aspx?dateFrom=' + date.toISOString().split('T')[0] + '&dateTo=' + date.toISOString().split('T')[0] + '&canteen=' + CANTEEN;
+    console.log(CANTEEN_WEBPAGE);
+    
     jsdom.env(
         CANTEEN_WEBPAGE,
         ['http://code.jquery.com/jquery.js'],
