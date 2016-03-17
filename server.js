@@ -80,21 +80,21 @@ var fetchMenu = function(cb){
 };
 
 var breakfastNotification = require('cron').CronJob;
-new breakfastNotification('0 0 8 * * *', function(){
+new breakfastNotification('0 0 7 * * *', function(){
     fetchMenu(function(err, text){
         sendMessage(text, 'Raňajky', 'Obed');
     });
 }, null, true, 'Europe/Bratislava');
 
 var lunchNotification = require('cron').CronJob;
-new lunchNotification('0 0 12 * * *', function(){
+new lunchNotification('0 0 11 * * *', function(){
     fetchMenu(function(err, text){
         sendMessage(text, 'Obed', 'Večera');
     });
 }, null, true, 'Europe/Bratislava');
 
 var dinnerNotification = require('cron').CronJob;
-new dinnerNotification('0 0 17 * * *', function(){
+new dinnerNotification('0 0 16 * * *', function(){
     fetchMenu(function(err, text){
         sendMessage(text, 'Večera', 'KONIEC');
     });
