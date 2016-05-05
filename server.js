@@ -76,7 +76,7 @@ var sendMessage = function(message, from, to){
 
 var fetchMenu = function(cb){
     var date = new Date();
-    var CANTEEN_WEBPAGE = 'https://www.jedalen.stuba.sk/webkredit/Tisk/ObjednavaniJidlenicek.aspx?dateFrom=' + date.toISOString().split('T')[0] + '&dateTo=' + date.toISOString().split('T')[0] + '&anteen=' + CANTEEN;
+    var CANTEEN_WEBPAGE = 'https://www.jedalen.stuba.sk/webkredit/Tisk/ObjednavaniJidlenicek.aspx?dateFrom=' + date.toISOString().split('T')[0] + '&dateTo=' + date.toISOString().split('T')[0] + '&canteen=' + CANTEEN;
     console.log(CANTEEN_WEBPAGE);
     
     jsdom.env(
