@@ -1,7 +1,9 @@
 'use strict';
 
-var CANTEEN = process.env.CANTEEN || '';
+var STU_CANTEEN = process.env.CANTEEN || '';
+var STU_CANTEEN_NAME = process.env.STU_CANTEEN_NAME || '';
 var ZOMATO_CANTEEN = process.env.ZOMATO_CANTEEN || '';
+var ZOMATO_CANTEEN_NAME = process.env.ZOMATO_CANTEEN_NAME || '';
 var HIPCHAT_ROOM = process.env.HIPCHAT_ROOM || '';
 var HIPCHAT_API_KEY = process.env.HIPCHAT_API_KEY || '';
 
@@ -47,7 +49,7 @@ var filterMessage = function(message, from, to) {
     return msgs;
 };
 
-var sendMessage = function(message, from, to){
+var sendMessage = function(canteenName, message, from, to){
 
     var messages = filterMessage(message, from, to);
 
@@ -62,7 +64,7 @@ var sendMessage = function(message, from, to){
     console.log(messages);
     hipchat.api.rooms.message({
         room_id: HIPCHAT_ROOM,
-        from: 'Daily menu',
+        from: 'Daily menu: ' + canteenName,
         color: 'gray',
         message: string,
         notify: 1
@@ -108,24 +110,24 @@ var fetchMenuZomato = function(cb){
 var breakfastNotification = require('cron').CronJob;
 new breakfastNotification('0 0 7 * * *', function(){
     fetchMenu(function(err, text){
-        sendMessage(text, 'Raňajky', 'Obed');
+        sendMessage(STU_CANTEEN_NAME, text, 'Raňajky', 'Obed');
     });
 }, null, true, 'Europe/Bratislava');
 
 var lunchNotification = require('cron').CronJob;
 new lunchNotification('0 0 11 * * *', function(){
     fetchMenu(function(err, text){
-        sendMessage(text, 'Obed', 'Večera');
+        sendMessage(STU_CANTEEN_NAME, text, 'Obed', 'Večera');
     });
 
     fetchMenuZomato(function(err, text){
-        sendMessage(text);
+        sendMessage(ZOMATO_CANTEEN_NAME, text);
     });
 }, null, true, 'Europe/Bratislava');
 
 var dinnerNotification = require('cron').CronJob;
 new dinnerNotification('0 0 16 * * *', function(){
     fetchMenu(function(err, text){
-        sendMessage(text, 'Večera', 'KONIEC');
+        sendMessage(STU_CANTEEN_NAME, text, 'Večera', 'KONIEC');
     });
 }, null, true, 'Europe/Bratislava');
