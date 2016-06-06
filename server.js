@@ -64,7 +64,7 @@ var sendMessage = function(canteenName, message, from, to){
     console.log(messages);
     hipchat.api.rooms.message({
         room_id: HIPCHAT_ROOM,
-        from: 'Daily menu: ' + canteenName,
+        from: canteenName,
         color: 'gray',
         message: string,
         notify: 1
