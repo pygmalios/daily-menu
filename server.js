@@ -1,6 +1,6 @@
 'use strict';
 
-var STU_CANTEEN = process.env.CANTEEN || '';
+var STU_CANTEEN = process.env.STU_CANTEEN || '';
 var STU_CANTEEN_NAME = process.env.STU_CANTEEN_NAME || '';
 var ZOMATO_CANTEEN = process.env.ZOMATO_CANTEEN || '';
 var ZOMATO_CANTEEN_NAME = process.env.ZOMATO_CANTEEN_NAME || '';
@@ -78,7 +78,7 @@ var sendMessage = function(canteenName, message, from, to){
 
 var fetchMenu = function(cb){
     var date = new Date();
-    var CANTEEN_WEBPAGE = 'https://www.jedalen.stuba.sk/webkredit/Tisk/ObjednavaniJidlenicek.aspx?dateFrom=' + date.toISOString().split('T')[0] + '&dateTo=' + date.toISOString().split('T')[0] + '&canteen=' + CANTEEN;
+    var CANTEEN_WEBPAGE = 'https://www.jedalen.stuba.sk/webkredit/Tisk/ObjednavaniJidlenicek.aspx?dateFrom=' + date.toISOString().split('T')[0] + '&dateTo=' + date.toISOString().split('T')[0] + '&canteen=' + STU_CANTEEN;
     console.log(CANTEEN_WEBPAGE);
     
     jsdom.env(
