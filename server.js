@@ -4,6 +4,10 @@ var STU_CANTEEN = process.env.STU_CANTEEN || '';
 var STU_CANTEEN_NAME = process.env.STU_CANTEEN_NAME || '';
 var ZOMATO_CANTEEN = process.env.ZOMATO_CANTEEN || '';
 var ZOMATO_CANTEEN_NAME = process.env.ZOMATO_CANTEEN_NAME || '';
+var ZOMATO_B_CANTEEN = process.env.ZOMATO_B_CANTEEN || '';
+var ZOMATO_B_CANTEEN_NAME = process.env.ZOMATO_B_CANTEEN_NAME || '';
+var ZOMATO_C_CANTEEN = process.env.ZOMATO_C_CANTEEN || '';
+var ZOMATO_C_CANTEEN_NAME = process.env.ZOMATO_C_CANTEEN_NAME || '';
 var HIPCHAT_ROOM = process.env.HIPCHAT_ROOM || '';
 var HIPCHAT_API_KEY = process.env.HIPCHAT_API_KEY || '';
 
@@ -92,8 +96,8 @@ var fetchMenu = function(cb){
     );
 };
 
-var fetchMenuZomato = function(cb){
-    var CANTEEN_WEBPAGE = 'https://www.zomato.com/bratislava/' + ZOMATO_CANTEEN + '/menu#daily';
+var fetchMenuZomato = function(zomato_id, cb){
+    var CANTEEN_WEBPAGE = 'https://www.zomato.com/bratislava/' + zomato_id + '/menu#daily';
     console.log(CANTEEN_WEBPAGE);
 
     jsdom.env(
@@ -120,9 +124,23 @@ new lunchNotification('0 0 11 * * *', function(){
         sendMessage(STU_CANTEEN_NAME, text, 'Obed', 'Večera');
     });
 
-    fetchMenuZomato(function(err, text){
-        sendMessage(ZOMATO_CANTEEN_NAME, text);
-    });
+    if (ZOMATO_CANTEEN) {
+        fetchMenuZomato(ZOMATO_CANTEEN, function(err, text){
+            sendMessage(ZOMATO_CANTEEN_NAME, text);
+        });
+    }
+    
+    if (ZOMATO_B_CANTEEN) {
+        fetchMenuZomato(ZOMATO_B_CANTEEN, function(err, text){
+            sendMessage(ZOMATO_B_CANTEEN_NAME, text);
+        });
+    }
+    
+    if (ZOMATO_C_CANTEEN) {
+        fetchMenuZomato(ZOMATO_C_CANTEEN, function(err, text){
+            sendMessage(ZOMATO_C_CANTEEN_NAME, text);
+        });
+    }
 }, null, true, 'Europe/Bratislava');
 
 var dinnerNotification = require('cron').CronJob;
