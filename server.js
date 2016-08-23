@@ -10,11 +10,19 @@ var ZOMATO_C_CANTEEN = process.env.ZOMATO_C_CANTEEN || '';
 var ZOMATO_C_CANTEEN_NAME = process.env.ZOMATO_C_CANTEEN_NAME || '';
 var HIPCHAT_ROOM = process.env.HIPCHAT_ROOM || '';
 var HIPCHAT_API_KEY = process.env.HIPCHAT_API_KEY;
+var SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
+var SLACK_CHANNEL = process.env.SLACK_CHANNEL;
 
 var jsdom = require('jsdom');
 var HipChatClient = require('hipchat-client');
+var SlackIncomingWebhooks = require('@slack/client').IncomingWebhook;
+
 if (HIPCHAT_API_KEY) {
     var hipchat = new HipChatClient(HIPCHAT_API_KEY);
+}
+
+if (SLACK_WEBHOOK_URL) {
+    var slack_wh = new SlackIncomingWebhooks(SLACK_WEBHOOK_URL);
 }
 
 var filterMessage = function(message, from, to) {
@@ -60,11 +68,15 @@ var sendMessage = function(canteenName, message, from, to){
     console.log(messages);
 
     if (hipchat) {
-        sendMessageHipChat(canteenName, message, from, to)
+        sendMessageHipChat(canteenName, messages)
+    }
+
+    if (slack_wh) {
+        sendMessageSlack(canteenName, messages)
     }
 };
 
-var sendMessageHipChat = function(canteenName, message, from, to){
+var sendMessageHipChat = function(canteenName, messages){
     var string = '<ul>';
     messages.forEach(function(line){
         string += '<li>';
@@ -84,6 +96,20 @@ var sendMessageHipChat = function(canteenName, message, from, to){
             console.log(err);
         }
         console.log(res, string);
+    });
+};
+
+var sendMessageSlack = function(canteenName, messages) {
+    var text = '';
+    messages.forEach(function(line) {
+        text += line + "\n";
+    });
+
+    slack_wh.send({
+        text: text,
+        channel: SLACK_CHANNEL,
+        iconEmoji: ':knife_fork_plate:',
+        username: canteenName
     });
 };
 

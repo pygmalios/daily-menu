@@ -3,7 +3,9 @@
   "description": "Daily menu notification",
   "version": "0.1.0",
   "private": true,
-  "authors": ["Jan Antala <hello@janantala.com>"],
+  "authors": [
+    "Jan Antala <hello@janantala.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/pygmalios/tutum-stream.git"
@@ -12,16 +14,15 @@
     "node": "0.10.x",
     "npm": "1.4.x"
   },
-  "scripts": {
-
-  },
+  "scripts": {},
   "dependencies": {
-    "lodash": "~2.4.1",
-    "forever": "~0.11.0",
+    "@slack/client": "slackhq/node-slack-sdk#2ee794c",
     "async": "~0.9.0",
-    "jsdom": "~7.2.2",
     "cron": "~1.1.0",
-    "hipchat-client": "~1.0.4"
+    "forever": "~0.11.0",
+    "hipchat-client": "~1.0.4",
+    "jsdom": "~7.2.2",
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "gulp": "~3.8.11",
