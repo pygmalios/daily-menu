@@ -9,11 +9,13 @@ var ZOMATO_B_CANTEEN_NAME = process.env.ZOMATO_B_CANTEEN_NAME || '';
 var ZOMATO_C_CANTEEN = process.env.ZOMATO_C_CANTEEN || '';
 var ZOMATO_C_CANTEEN_NAME = process.env.ZOMATO_C_CANTEEN_NAME || '';
 var HIPCHAT_ROOM = process.env.HIPCHAT_ROOM || '';
-var HIPCHAT_API_KEY = process.env.HIPCHAT_API_KEY || '';
+var HIPCHAT_API_KEY = process.env.HIPCHAT_API_KEY;
 
 var jsdom = require('jsdom');
 var HipChatClient = require('hipchat-client');
-var hipchat = new HipChatClient(HIPCHAT_API_KEY);
+if (HIPCHAT_API_KEY) {
+    var hipchat = new HipChatClient(HIPCHAT_API_KEY);
+}
 
 var filterMessage = function(message, from, to) {
     var msgs = [];
@@ -54,9 +56,15 @@ var filterMessage = function(message, from, to) {
 };
 
 var sendMessage = function(canteenName, message, from, to){
-
     var messages = filterMessage(message, from, to);
+    console.log(messages);
 
+    if (hipchat) {
+        sendMessageHipChat(canteenName, message, from, to)
+    }
+};
+
+var sendMessageHipChat = function(canteenName, message, from, to){
     var string = '<ul>';
     messages.forEach(function(line){
         string += '<li>';
@@ -65,7 +73,6 @@ var sendMessage = function(canteenName, message, from, to){
     });
     string += '</ul>';
 
-    console.log(messages);
     hipchat.api.rooms.message({
         room_id: HIPCHAT_ROOM,
         from: canteenName,
