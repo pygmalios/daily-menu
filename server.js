@@ -137,7 +137,7 @@ var fetchMenuZomato = function(zomato_id, cb){
         CANTEEN_WEBPAGE,
         ['http://code.jquery.com/jquery.js'],
         function (err, window) {
-            var text = window.$('.tmi-group').text();
+            var text = window.$('.tmi-group:first').text();
             console.log(text);
             return cb(err, text);
         }
