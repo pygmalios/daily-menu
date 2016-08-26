@@ -8,6 +8,8 @@ var ZOMATO_B_CANTEEN = process.env.ZOMATO_B_CANTEEN || '';
 var ZOMATO_B_CANTEEN_NAME = process.env.ZOMATO_B_CANTEEN_NAME || '';
 var ZOMATO_C_CANTEEN = process.env.ZOMATO_C_CANTEEN || '';
 var ZOMATO_C_CANTEEN_NAME = process.env.ZOMATO_C_CANTEEN_NAME || '';
+var ZOMATO_D_CANTEEN = process.env.ZOMATO_D_CANTEEN || '';
+var ZOMATO_D_CANTEEN_NAME = process.env.ZOMATO_D_CANTEEN_NAME || '';
 var HIPCHAT_ROOM = process.env.HIPCHAT_ROOM || '';
 var HIPCHAT_API_KEY = process.env.HIPCHAT_API_KEY;
 var SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
@@ -172,6 +174,12 @@ new lunchNotification('0 0 11 * * *', function(){
     if (ZOMATO_C_CANTEEN) {
         fetchMenuZomato(ZOMATO_C_CANTEEN, function(err, text){
             sendMessage(ZOMATO_C_CANTEEN_NAME, text);
+        });
+    }
+    
+    if (ZOMATO_D_CANTEEN) {
+        fetchMenuZomato(ZOMATO_D_CANTEEN, function(err, text){
+            sendMessage(ZOMATO_D_CANTEEN_NAME, text);
         });
     }
 }, null, true, 'Europe/Bratislava');
