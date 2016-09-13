@@ -107,12 +107,17 @@ var sendMessageSlack = function(canteenName, messages) {
         text += line + "\n";
     });
 
-    slack_wh.send({
+    var msg = {
         text: text,
-        channel: SLACK_CHANNEL,
         iconEmoji: ':knife_fork_plate:',
         username: canteenName
-    });
+    };
+
+    if (SLACK_CHANNEL) {
+        msg.channel = SLACK_CHANNEL;
+    }
+
+    slack_wh.send(msg);
 };
 
 var fetchMenu = function(cb){
