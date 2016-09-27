@@ -137,7 +137,7 @@ var fetchMenu = function(cb){
 };
 
 var fetchMenuZomato = function(zomato_id, cb){
-    var CANTEEN_WEBPAGE = 'https://www.zomato.com/bratislava/' + zomato_id + '/menu#daily';
+    var CANTEEN_WEBPAGE = 'https://www.zomato.com/bratislava/' + zomato_id + '/daily-menu';
     console.log(CANTEEN_WEBPAGE);
 
     jsdom.env(
