@@ -1,6 +1,6 @@
 # TUTUM-STREAM
 
-tutumstream:
+dailymenu:
   build: .
   restart: always
   environment:
