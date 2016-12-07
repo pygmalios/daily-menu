@@ -143,7 +143,9 @@ var zomatoFetch = function(zomato_id, cb) {
   console.log(CANTEEN_WEBPAGE);
 
   var child;
-  var cmd = "curl '" + CANTEEN_WEBPAGE + "' -H 'accept-language: sk-SK,sk;q=0.8,cs;q=0.6,en-US;q=0.4,en;q=0.2' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36' -H 'cookie: zl=en' --compressed";
+
+  var proxy_argument = process.env.PROXY ?  ` --proxy ${process.env.PROXY}` : '';
+  var cmd = "curl '" + CANTEEN_WEBPAGE + "' -H 'accept-language: sk-SK,sk;q=0.8,cs;q=0.6,en-US;q=0.4,en;q=0.2' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36' -H 'cookie: zl=en' --compressed" + proxy_argument;
 
   // executes `pwd`
   child = exec(cmd, function (error, stdout, stderr) {
