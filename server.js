@@ -10,6 +10,8 @@ var ZOMATO_C_CANTEEN = process.env.ZOMATO_C_CANTEEN || '';
 var ZOMATO_C_CANTEEN_NAME = process.env.ZOMATO_C_CANTEEN_NAME || '';
 var ZOMATO_D_CANTEEN = process.env.ZOMATO_D_CANTEEN || '';
 var ZOMATO_D_CANTEEN_NAME = process.env.ZOMATO_D_CANTEEN_NAME || '';
+var ZOMATO_E_CANTEEN = process.env.ZOMATO_E_CANTEEN || '';
+var ZOMATO_E_CANTEEN_NAME = process.env.ZOMATO_E_CANTEEN_NAME || '';
 var HIPCHAT_ROOM = process.env.HIPCHAT_ROOM || '';
 var HIPCHAT_API_KEY = process.env.HIPCHAT_API_KEY;
 var SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
@@ -18,7 +20,7 @@ var SLACK_CHANNEL = process.env.SLACK_CHANNEL;
 var jsdom = require('jsdom');
 var HipChatClient = require('hipchat-client');
 var SlackIncomingWebhooks = require('@slack/client').IncomingWebhook;
-var sys = require('sys')
+var sys = require('sys');
 var exec = require('child_process').exec;
 
 if (HIPCHAT_API_KEY) {
@@ -211,6 +213,12 @@ new lunchNotification('0 0 11 * * *', function(){
     if (ZOMATO_D_CANTEEN) {
         fetchMenuZomato(ZOMATO_D_CANTEEN, function(err, text){
             sendMessage(ZOMATO_D_CANTEEN_NAME, text);
+        });
+    }
+
+    if (ZOMATO_E_CANTEEN) {
+        fetchMenuZomato(ZOMATO_E_CANTEEN, function(err, text){
+            sendMessage(ZOMATO_E_CANTEEN_NAME, text);
         });
     }
 }, null, true, 'Europe/Bratislava');
